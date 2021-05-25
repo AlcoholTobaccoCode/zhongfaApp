@@ -8,11 +8,8 @@
 const install = (Vue, vm) => {
 	// 此为自定义配置参数
 	Vue.prototype.$u.http.setConfig({
-		baseUrl: 'http://192.168.0.9:9002', // 请求的本域名(客户服务器)
-		// baseUrl: 'https://bf1688.cn.utools.club', // 请求的本域名(关总服务器)
-		// baseUrl: 'http://192.168.2.80:90', // 请求的本域名(关总服务器)
-		// baseUrl: 'http://yd.ya.258top.top', // 请求的本域名(关总服务器)
-		// baseUrl: 'http://127.0.0.1:8282/', // 请求的本域名(本地)
+		baseUrl: '', // 
+		// baseUrl: 'http://localhost:51907', // 请求的本域名(本地)
 		method: 'POST',
 		// 设置为json，返回后会对数据进行一次JSON.parse()
 		dataType: 'json',

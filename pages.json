@@ -8,12 +8,6 @@
 			"style": {
 				"navigationBarTitleText": "登录"
 			}
-		},
-		{
-			"path": "pages/scanPage/index",
-			"style": {
-				"navigationBarTitleText": "测试页: 扫描 新增、编辑、查看已扫页面"
-			}
 		}
 	],
 	"globalStyle": {

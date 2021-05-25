@@ -6,13 +6,10 @@
  */
 //* 登录
 import Login from "@/common/http/http.api.module/login/index";
-//* 扫描时表单相关接口
-import ScanForm from "@/common/http/http.api.module/index/index";
 
 const install = (Vue, vm) => {
 	vm.$u.api = {
-		Login: Login(vm),
-		ScanForm: ScanForm(vm)
+		Login: Login(vm)
 	}
 }
 

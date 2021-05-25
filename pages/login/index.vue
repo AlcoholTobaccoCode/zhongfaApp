@@ -2,9 +2,9 @@
 	<view class="login">
 		<view class="content">
 			<!-- 头部logo -->
-			<!-- <view class="header">
+			<view class="header">
 				<image :src="logoImage"></image>
-			</view> -->
+			</view>
 			<!-- 主体表单 -->
 			<view class="main">
 				<wInput v-model="loginCode" :bColor="accountBColor" @focus="restore('account')" type="text" maxlength="13" placeholder="请输入登录账号" :focus="isFocus"></wInput>
@@ -34,7 +34,7 @@
 		data() {
 			return {
 				//logo图片 base64
-				logoImage: 'https://ftp.bmp.ovh/imgs/2021/04/16b5243cd379a2c7.png',
+				logoImage: 'https://bugorme.icu/imgs/ya-logo.jpg',
 				loginCode: '', // 登录账号
 				password: '', //密码
 				isRotate: false, //是否加载旋转
@@ -122,8 +122,12 @@
 					loginCode: that.loginCode,
 					password: that.password
 				}
-				
-				that.$u.api.Login.login(
+				that.$u.post('/Login/TryLogin', loginRequestData).then(res => {
+					console.info(res);
+				}).catch(err => {
+					console.info(err);
+				});
+				/* that.$u.api.Login.login(
 					loginRequestData
 				).then(res => {
 					uni.hideLoading();
@@ -144,13 +148,13 @@
 						that.$cache.put('loginUser', {
 							loginCode: that.$aes.encrypt(that.loginCode),
 							password: that.$aes.encrypt(that.password)
-							/* loginCode: that.loginCode,
-							password: that.password */
+							// loginCode: that.loginCode,
+							// password: that.password
 						});
 						
-						/* that.$cache.put('cacheTime', {
-							timetemp: Date.parse(new Date()),
-						}); */
+						// that.$cache.put('cacheTime', {
+						// 	timetemp: Date.parse(new Date()),
+						// });
 						
 						setTimeout(() => {
 							uni.reLaunch({ //* 跳转并销毁登录页面
@@ -164,7 +168,7 @@
 				}).catch(err => {
 					that.$util.msg(err.message);
 					uni.hideLoading();
-				});
+				}); */
 				
 				setTimeout(() => {
 					that.$util.msg('23333')
@@ -212,7 +216,7 @@
 	}
 	
 	/* 头部 logo */
-	/* .header {
+	.header {
 		width: 161rpx;
 		height: 161rpx;
 		box-shadow: 0rpx 0rpx 60rpx 0rpx rgba(0, 0, 0, 0.1);
@@ -228,7 +232,7 @@
 			height: 161rpx;
 			border-radius: 50%;
 		}
-	} */
+	}
 
 	
 

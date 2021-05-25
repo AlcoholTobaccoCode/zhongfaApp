@@ -8,7 +8,7 @@
 let Login = (vm) => {
   return {
     login: (params = {}) => {
-      return vm.$u.post('Controller/Login.ashx', params);
+      return vm.$u.post('Login/TryLogin', params);
     }
   }
 }
