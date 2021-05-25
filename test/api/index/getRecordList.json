@@ -1,0 +1,66 @@
+{
+  "code": 0,
+  "data": [{
+
+      "user_id": 1000,
+      "user_name": "杜青山",
+      "process_num": 200,
+      "process_name": "工序名称1",
+      "nnnnname": "长别名称/课别名称1",
+      "product_num": 300,
+      "product_name": "产品名称1",
+      "markOrderNum": "制令编号1",
+      "qualified": 111,
+      "unqualified": 1
+    },
+    {
+      "user_id": 1001,
+      "user_name": "杜青山",
+      "process_num": 201,
+      "process_name": "工序名称1",
+      "nnnnname": "长别名称/课别名称1",
+      "product_num": 301,
+      "product_name": "产品名称1",
+      "markOrderNum": "制令编号1",
+      "qualified": 222,
+      "unqualified": 2
+    },
+    {
+      "user_id": 1002,
+      "user_name": "杜青山",
+      "process_num": 202,
+      "process_name": "工序名称1",
+      "nnnnname": "长别名称/课别名称1",
+      "product_num": 302,
+      "product_name": "产品名称1",
+      "markOrderNum": "制令编号1",
+      "qualified": 333,
+      "unqualified": 3
+    },
+    {
+      "user_id": 1003,
+      "user_name": "杜青山",
+      "process_num": 203,
+      "process_name": "工序名称1",
+      "nnnnname": "长别名称/课别名称1",
+      "product_num": 303,
+      "product_name": "产品名称1",
+      "markOrderNum": "制令编号1",
+      "qualified": 444,
+      "unqualified": 4
+    },
+    {
+      "user_id": 1004,
+      "user_name": "杜青山",
+      "process_num": 204,
+      "process_name": "工序名称1",
+      "nnnnname": "长别名称/课别名称1",
+      "product_num": 304,
+      "product_name": "产品名称1",
+      "markOrderNum": "制令编号1",
+      "qualified": 555,
+      "unqualified": 5
+    }
+  ],
+  "message": "查询成功"
+}
