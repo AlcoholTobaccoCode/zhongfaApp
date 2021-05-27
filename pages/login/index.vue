@@ -73,7 +73,7 @@
 					if (parseInt(cacheTime) < Date.parse(new Date())) {
 						that.clearCache()
 						return;
-					}  
+					}   
 				} */ 
 				let value = uni.getStorageSync('WorkReport_loginUser');
 				console.info(value);

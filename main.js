@@ -23,8 +23,8 @@ Vue.prototype.$cache = cache;
 Vue.prototype.$aes = AES;
 
 //* 移动端调试支持
-// import vconsole from '@/utils/vconsole.min';
-// Vue.prototype.$vconsole = new vconsole(); //* 挂载 vconsole 注: app 端不支持这玩意
+import vconsole from '@/utils/vconsole.min';
+Vue.prototype.$vconsole = new vconsole(); //* 挂载 vconsole 注: app 端不支持这玩意
 
 App.mpType = 'app';
 

@@ -14,6 +14,23 @@
 
 <style lang="scss">
 	@import "uview-ui/index.scss"; //* uView 样式支持
-	@import "@/common/css/rotate.scss"; //* 水波纹样式支持
+	@import "@/common/css/yaicon/iconfont.css"; //* 扩展 icon 字体图标
 	/*每个页面公共css */
+	
+	.card-shadow {
+		box-sizing: border-box;
+		width: 96%;
+		margin: 0 auto;
+		padding-right: 20rpx;
+		margin-top: 18rpx;
+		box-shadow: 0 0 10rpx rgba(0, 0, 0, .1);
+		border-radius: 12rpx;
+		background-color: #fff;
+	}
+	//* E 卡片样式
+	
+	.required {
+		color: $u-type-error;
+	}
+	//* E 必填样式
 </style>

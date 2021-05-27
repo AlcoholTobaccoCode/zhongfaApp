@@ -110,14 +110,15 @@
         "enable" : false
     },
     "h5" : {
-        "title" : "测试h5",
+        "title" : "中法移动下单",
         "devServer" : {
-            "port" : 51907,
+            "port" : 8071,
             "https" : false,
             "disableHostCheck" : true
         },
         "router" : {
-            "mode" : "history"
+            "mode" : "history",
+            "base" : "/ViewApp/"
         }
     }
 }

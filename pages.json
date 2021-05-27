@@ -6,9 +6,31 @@
 		{
 			"path": "pages/login/index", //* 登录页
 			"style": {
-				"navigationBarTitleText": "登录"
+				// "navigationBarTitleText": "登录"
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/index/index", //* 首页
+			"style": {
+				// "navigationBarTitleText": "首页",
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/order/add/index", //* 订单新增
+			"style": {
+				// "navigationBarTitleText": "订单新增",
+				"navigationStyle":"custom"
 			}
 		}
+		// {
+		// 	"path": "pages/order/other/detailLine", //* 新增明细行
+		// 	"style": {
+		// 		// "navigationBarTitleText": "新增明细行",
+		// 		"navigationStyle":"custom"
+		// 	}
+		// }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white", //* 导航栏标题颜色及状态栏前景颜色，仅支持 black/white

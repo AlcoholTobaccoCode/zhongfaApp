@@ -8,7 +8,7 @@
 const install = (Vue, vm) => {
 	// 此为自定义配置参数
 	Vue.prototype.$u.http.setConfig({
-		baseUrl: '', // 
+		baseUrl: '/', // 请求的本域名(本地)
 		// baseUrl: 'http://localhost:51907', // 请求的本域名(本地)
 		method: 'POST',
 		// 设置为json，返回后会对数据进行一次JSON.parse()
@@ -24,6 +24,8 @@ const install = (Vue, vm) => {
 
 	// 请求拦截部分，如配置，每次请求前都会执行
 	Vue.prototype.$u.http.interceptor.request = (config) => {
+		
+		return false;
 		uni.hideLoading();
 		// return false;
 		// 如果return一个false值，则会取消本次请求
@@ -52,6 +54,8 @@ const install = (Vue, vm) => {
 	Vue.prototype.$u.http.interceptor.response = (res) => {
 
 		uni.hideLoading();
+
+		return res;
 		//TODO 请完善拦截器
 		if (res == null) {
 			// msg('接口调用异常, 请联系管理员处理');

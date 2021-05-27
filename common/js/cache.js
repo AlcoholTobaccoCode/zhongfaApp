@@ -20,8 +20,8 @@
  * 】  
  * @type {String}
  */
-const postfix = '_workReportTimeCache'; // 时间缓存前缀
-const sysName = 'WorkReport_'; //* 缓存名前缀
+const postfix = '_zhongFaTimeCache'; // 时间缓存前缀
+const sysName = 'ZhongFa_'; //* 缓存名前缀
 /**  
  * 设置缓存   
  * @param  {[type]} k [键名]  
