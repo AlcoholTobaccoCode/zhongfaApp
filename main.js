@@ -8,9 +8,6 @@ import * as util from '@/utils/util.js';
 import cache from '@/common/js/cache.js';
 //* Store
 import store from '@/store/index.js';
-//* 扫码支持
-import scan from '@/components/p-scan/scan.vue';
-Vue.component('scan',scan);
 //* 加密
 import AES from '@/utils/AES/AES.js';
 

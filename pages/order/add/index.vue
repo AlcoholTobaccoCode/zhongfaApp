@@ -74,13 +74,90 @@
 				<!-- E 新增明细行 -->
 			</view>
 			<!-- E 订单详情 -->
-			<view class="view-content" v-if="current === 1">
-				采购情况
+			<view class="view-content procurement" v-if="current === 1">
+				<view class="view-content-title">客户采购情况（近三个月）</view>
+				<view class="table-container">
+					<view class="d-table table-head">
+						<view class="d-tr">
+							<view class="d-th">项目数量</view>
+							<view class="d-th">前1个月</view>
+							<view class="d-th">前2个月</view>
+							<view class="d-th">前3个月</view>
+							<view class="d-th">本年累计</view>
+						</view>
+					</view>
+					<scroll-view class="border-bottom table-body" scroll-y>
+						<view class="d-table">
+							<view class="d-tr table-item" v-for="i in 100" :key="i">
+								<view class="d-td">张三</view>
+								<view class="d-td">李四</view>
+								<view class="d-td">李四</view>
+								<view class="d-td">李四</view>
+								<view class="d-td">王五</view>
+							</view>
+						</view>
+					</scroll-view>
+				</view>
+				<!-- E 表格 -->
 			</view>
 			<!-- E 采购情况 -->
-
 			<view class="view-content" v-if="current === 2">
-				未执行订单
+				<view class="description-goods">
+					<view class="card-shadow">
+						<view class="card-title">
+							货款情况
+						</view>
+						<view class="card-item">
+							<view class="card-item--single">
+								<text>总货款：</text>
+								<text>total payment for goods</text>
+							</view>
+							<view class="card-item--single">
+								<text>超期欠款：</text>
+								<text>overdue arrears lalalala</text>
+							</view>
+							<view class="card-item--single">
+								<text>已落实当月收货款：</text>
+								<text>lmplemented current mounth collections</text>
+							</view>
+						</view>
+					</view>
+					<view class="card-shadow">
+						<view class="card-title">
+							发货情况
+						</view>
+						<view class="card-item">
+							<view class="card-item--single">
+								<text>已批未发货物：</text>
+								<text>overdue arrears lalalala</text>
+							</view>
+							<view class="card-item--single">
+								<text>当月已发出货物：</text>
+								<text>lmplemented current mounth collections</text>
+							</view>
+						</view>
+					</view>
+				</view>
+				<!-- E 货款情况、发货情况 -->
+				<view class="non-execution-order">
+					<view class="card-shadow">
+						<view class="card-title">未执行订单</view>
+						<view class="non-execution-order-content">
+							<view v-for="(item, index) in addDetailList" :key="item.index">
+								<view class="u-border-bottom">
+									<!-- 此层wrap在此为必写的，否则可能会出现标题定位错误 -->
+									<view class="title-wrap add-detail-item">
+										<view class="item-single">型号: {{ item.model }}</view>
+										<view class="item-single">单位: {{ item.unit }}</view>
+										<view class="item-single">单价: {{ item.price }}</view>
+										<view class="item-single">数量: {{ item.number }}</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+				<!-- E 未执行订单列表 -->
 			</view>
 			<!-- E 未执行订单 -->
 		</view>
@@ -89,7 +166,7 @@
 			<u-button type="warning" :ripple="true" @click="submit(1)">提交</u-button>
 		</view>
 
-		<u-popup v-model="addShow" mode="center" width="100%" height="100%" z-index="19989999">
+		<u-popup v-model="addShow" mode="center" width="100%" height="100%" z-index="1000">
 			<view class="main">
 				<u-navbar title="新增明细行" :is-back="true" :custom-back="closeDetailPop"
 					:background="{backgroundColor: '#007aff'}" title-color="#fff" back-icon-color="#fff"></u-navbar>
@@ -107,12 +184,12 @@
 						<!-- E 单位 -->
 						<u-form-item prop="price" label="单价" label-width="150">
 							<text class="required">*</text>
-							<u-input v-model="detailForm.price" placeholder="输入单价" input-align="right" />
+							<u-input type="number" v-model="detailForm.price" placeholder="输入单价" input-align="center" />
 						</u-form-item>
 						<!-- E 单价 -->
 						<u-form-item prop="number" label="数量" label-width="150">
 							<text class="required">*</text>
-							<u-input v-model="detailForm.number" placeholder="数量" input-align="center" />
+							<u-input type="number" v-model="detailForm.number" placeholder="数量" input-align="center" />
 							<!-- <u-number-box v-model="detailForm.number" :min="1" @change="numberChange"></u-number-box> -->
 						</u-form-item>
 						<!-- E 数量 -->
@@ -130,8 +207,12 @@
 </template>
 
 <script>
+	import fixedLeft from '@/components/table/normal-fixed-left/normal-fixed-left.vue';
 	let that;
 	export default {
+		components:{
+			fixedLeft
+		},
 		data() {
 			return {
 				addShow: false,
@@ -144,7 +225,7 @@
 				}, {
 					name: '未执行订单'
 				}],
-				current: 0,
+				current: 2, //* 顶部 tabs 坐标
 				//* E *************************** tabs 相关
 				//* S *************************** 表单样式、数据 相关
 				labelStyle: { //* 表单样式
@@ -205,7 +286,7 @@
 				detailForm: {
 					model: '', //* 型号
 					unit: '', //* 单位
-					price: '', //* 单价
+					price: 0, //* 单价
 					number: 0 //* 数量
 				},
 				addDetailFormRules: {
@@ -226,12 +307,35 @@
 					}]
 				},
 				//* E *************************** 表单样式、数据 相关
+				//* S *************************** 采购情况表格数据 相关
+				procurementDatagrid: [
+					{
+						type: 'td',
+						title: '项目',
+						
+					},{
+						type: 'td',
+						title: '前1个月'
+					},{
+						type: 'td',
+						title: '前2个月'
+					},{
+						type: 'td',
+						title: '前3个月'
+					},{
+						type: 'td',
+						title: '本年累计'
+					},
+				],
+				//* E *************************** 采购情况表格数据 相关
 			};
 		},
 		// 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
 		onReady() {
 			//* 新增页面表单规则
-			this.$refs.uForm.setRules(this.formRules);
+			if (this.$refs.uForm) {
+				this.$refs.uForm.setRules(this.formRules);
+			}
 		},
 		mounted() {
 			that = this;
@@ -266,7 +370,9 @@
 				if (this.addShow) {
 					//* 新增明细行表单规则
 					setTimeout(() => {
-						this.$refs.addDetailRef.setRules(this.addDetailFormRules);
+						if (that.$refs.addDetailRef) {
+							that.$refs.addDetailRef.setRules(this.addDetailFormRules);
+						}
 					}, 200);
 				}
 			},
@@ -297,9 +403,13 @@
 				this.$refs.addDetailRef.validate(valid => {
 					let model = this.detailForm.model,
 						unit = this.detailForm.unit,
-						price = this.detailForm.price,
+						price = +(this.detailForm.price),
 						number = +(this.detailForm.number);
-					if (+(number) <= 0) {
+					if (+(price) <= 0 || isNaN(+(price))) {
+						this.$util.msg('请输入正确的单价');
+						return;
+					}
+					if (+(number) <= 0 || isNaN(+(number))) {
 						this.$util.msg('请输入正确的数量');
 						return;
 					}
@@ -314,13 +424,18 @@
 					this.addDetailList.push(insert);
 					this.addShow = !this.addShow;
 					//* 清空
-					for(let i in this.detailForm) {
+					this.detailForm['model'] = '';
+					this.detailForm['unit'] = '';
+					this.detailForm['price'] = 0;
+					this.detailForm['number'] = 0;
+					/* for(let i in this.detailForm) {
 						this.detailForm[i] = '';
-					}
+					} */
 				});
 			},
 			//* 提交事件
 			submit(val) { //* 0: 暂存; 1: 提交
+				let requestData = {};
 				switch (+(val)) {
 					case 0:
 						console.info('🐱‍👓 ~ 提交操作是: 暂存！');
@@ -345,18 +460,17 @@
 		padding-bottom: 94rpx;
 	}
 
-	//* 根盒子
-
+	//* E 根盒子
+	
 	.radio-group {
 		margin-left: auto;
 	}
 
-	//* 单选样式
-
-	//* 
+	//* E 单选样式
+	.non-execution-order-content, //* 未执行订单列表
 	.add-detail {
 		margin-bottom: 20rpx;
-		min-height: 400rpx;
+		min-height: calc(100vh - 870rpx);
 		height: auto;
 
 		.detail-title {
@@ -378,7 +492,7 @@
 
 	}
 
-	//* 表单、新增明细行样式
+	//* E 表单、新增明细行样式
 
 	.detail-content {
 		padding: 20rpx;
@@ -388,7 +502,7 @@
 		}
 	}
 
-	//* 明细单项盒子
+	//* E 明细单项盒子
 
 	.add-detail-item {
 		display: flex;
@@ -403,8 +517,103 @@
 
 	}
 
-	//* 新增明细行单项样式
+	//* E 新增明细行单项样式
+	
+	.procurement {
+		min-height: calc(100vh - 280rpx);
+		background-color: #fff;
+		
+		.view-content-title {
+			font-size: 36rpx;
+			padding: 8rpx 20rpx;
+			border-bottom: 2rpx solid #e6e6e6;
+		}
+		//* 采购情况 title
+		
+		.table-container {
+			.table-head {
+				.d-tr {
+					.d-th {
+						font-size: 32rpx;
+						padding: 16rpx 0;
+					}
+					//* 单元格子项
+				}
+			}
+			//* 表格 head
+			
+			.table-body {
+				max-height: calc(100vh - 402rpx);
+				
+				.table-item {
+					transition: all ease-in-out .2s;
+					
+					/* &:hover {
+						background-color: #f4f4f4;
+					} */
+					
+					.d-td {
+						padding: 16rpx 0;
+					}
+					//* 单元格子项
+				}
+				
+				.table-item:nth-child(2n - 1) {
+					background-color: #e6e6e6;
+				}
+				//* 行子项
+			}
+			//* 表格 body
+		}
+		//* 表格样式
+	}
 
+	//* E 采购情况
+	
+	.description-goods {
+		display: flex;
+
+		.card-shadow {
+			width: 100%;
+			margin: 6rpx;
+			padding-right: unset;
+			padding: 10rpx;
+			border-radius: 8rpx;
+			transition: background-color ease-in-out .2s;
+			
+			&:hover {
+				 background-color: #f5f5f5;
+			}
+			
+			.card-item {
+				
+				&--single {
+					
+					text {
+						
+						&:nth-child(1) {
+							color: #838080;
+							text-indent: 1em;
+						}
+						&:nth-child(2) {
+							color: #000;
+							text-decoration: underline;
+						}
+					}
+				}
+			}
+			//* 子项内容
+		}
+	
+	}
+	
+	//* 两个卡片
+
+	.non-execution-order-content {
+		min-height: calc(100vh - 720rpx);
+	}
+
+	//* E 未执行订单
 
 	.submit-btn {
 		padding: 6rpx 52rpx;
@@ -412,7 +621,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		z-index: 19981125;
+		z-index: 10;
 		background-color: #fff;
 		box-shadow: 0 -4rpx 20rpx rgba(0, 0, 0, .16);
 

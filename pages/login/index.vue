@@ -61,6 +61,9 @@
 			},
 			//* 页面进入时 
 			isLogin() {
+				uni.reLaunch({ //* 跳转并销毁登录页面
+					url: '/pages/index/index'
+				});
 				/**
 				 * 407 
 				 * 

@@ -15,6 +15,7 @@
 <style lang="scss">
 	@import "uview-ui/index.scss"; //* uView 样式支持
 	@import "@/common/css/yaicon/iconfont.css"; //* 扩展 icon 字体图标
+	@import '@/common/css/table.scss'; //* 表格样式
 	/*每个页面公共css */
 	
 	.card-shadow {
@@ -33,4 +34,11 @@
 		color: $u-type-error;
 	}
 	//* E 必填样式
+	
+	.card-title {
+		font-size: 36rpx;
+		padding: 8rpx 20rpx;
+		border-bottom: 2rpx solid #e6e6e6;
+	}
+	
 </style>
