@@ -154,6 +154,8 @@
 									</view>
 								</view>
 							</view>
+							<u-empty v-if="!addDetailList.length" text="未执行订单为空" mode="list"></u-empty>
+							<!-- 新增明细行列表为空时提示 -->
 						</view>
 					</view>
 				</view>
